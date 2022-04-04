@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Bug_Tracker.Models;
 
 namespace Bug_Tracker.Data
 {
@@ -9,5 +10,6 @@ namespace Bug_Tracker.Data
             : base(options)
         {
         }
+        public DbSet<Bug_Tracker.Models.Bug> Bug { get; set; }
     }
 }
