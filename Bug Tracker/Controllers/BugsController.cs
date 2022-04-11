@@ -21,10 +21,18 @@ namespace Bug_Tracker.Controllers
         }
 
         // GET: Bugs
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-            return View(await _context.Bug.ToListAsync());
+            var bugs = from m in _context.Bug
+                       select m;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                bugs = bugs.Where(s => s.IssueName!.Contains(searchString) || s.IssueDescription!.Contains(searchString));
+            }
+            return View(await bugs.ToListAsync());
         }
+
 
         // GET: Bugs/Details/5
         public async Task<IActionResult> Details(int? id)
